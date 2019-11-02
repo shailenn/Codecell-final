@@ -1,0 +1,171 @@
+{% extends 'Accounts/base.html' %}
+{% block title %} Answer {% endblock %}
+{% load static %}
+{% block content %}
+
+ <!-- Navbar links -->
+ 
+  <header id="header">
+    <div class="container-fluid fixed-top bg-dark" >
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <!-- Logo -->
+          <a class="logo" href="{% url 'home' %}"><img src="{% static 'Accounts/assets/logo.png' %}" width="200px;" alt=""></a>
+            <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"><img src="{% static 'Accounts/assets/Ham.png' %}" style="width: 30px;" alt=""/></span>
+            </button>
+          <!-- navbar links -->
+          <div class="collapse navbar-collapse" id="navbarContent" >
+            <ul class="navbar-nav ml-auto ">
+              <li class="nav-item">
+                
+                <a class="nav-link active text-light " href="{% url 'home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fa fa-home"></span> Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'quiz_category_list_all' %}" data-scroll-nav="5" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fas fa-pen"></span> Quiz</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'forum_home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px"><span class="fas fa-comments"></span> Forum</a>
+              </li>
+
+                          <li><div class="dropdown">
+                <button type="button" class="btn btn-outline-light dropdown-toggle fa fa-user" data-toggle="dropdown">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  {% if user.is_authenticated %}
+                  <a class="dropdown-item" href="{% url 'quiz_progress' %}">Quiz  Progress</a>
+                  <a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">My Profile</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                  {% else %}
+                  <a class="dropdown-item" href="{% url 'authenticate' %}">Sign in</a>
+                  {% endif %}
+                </div>
+
+              </div></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- End Navbar -->
+
+<section id="profile" style="padding: 20px">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9" style="margin-top:19px;">
+          <div class="card">
+            <div class="card-header" style="background:#343a40">
+              <h4 class="text-center text-light"><i><i class="fas fa-question-circle "></i> Doubts</i></h4>
+            </div>
+            <div class="card-body">
+              <div class="container">
+                   <div class="row">
+                       <div class="col-md-12">
+                         <h2>{{ question }}</h2>  
+                         <h4>{{ question.description }}</h4>
+                       </div><br>
+                    </div>
+                    <div class="row">
+                
+                    <div class="col-md-6">
+                        <h5 class="text-muted" style="margin-top:20px;">Total Answers : {{ question.count_answers}} </h5>
+                    </div>
+                    </div>
+                    
+                    <br>
+                     <hr>  
+                  <div class="well">
+                    <h4><i>Post Your Answer:</i></h4>
+                    
+                  {% if blankerror %}
+                  <div class="alert alert-warning">
+                      <strong>{{ blankerror }}</strong>
+                  </div>
+                  {% endif %}
+                    <form role="form" method="post" >
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <textarea name="answer" class="form-control"></textarea>
+                        </div>
+                        <div class="text-center">
+                        <button type="submit" class="btn btn-dark" name="create_answer">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                {% if answer %}
+                <h3>Answers :</h3>
+                {% for i in answer %}
+                <div class="card incard">
+                  <div class="container bg-secondary">  
+                    <div class="row">
+                      <div class="col-md-12">
+                          <p class="text-comment text-light">Answered by <u><span class="user-comment text-light">{{ i.user }}</span></u><span class="text-muted date"> &#8226; {{ i.answered_on }}</span></p>
+                         <h5> &#187; {{ i }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                {% endfor %}
+
+                {% else %}
+                <h3>No Answers yet.</h3>
+                {% endif %}
+
+                   
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div style="margin-top:20px;">
+                   <div class="card text-center bg-light text-dark mb-3">
+                    <div class="card-body">
+                     <h3>Doubts Asked</h3>
+                     <h4 class="display-4">
+                     <i class="fas fa-pencil-alt"></i> {% if user.is_authenticated %} {{ user.doubts_asked }} {% else %} -- {% endif %}
+                    </h4>
+                    
+                   </div>
+                  </div>
+               </div>
+               <div style="margin-top:20px;">
+                   <div class="card text-center bg-light text-dark mb-3">
+                    <div class="card-body">
+                     <h3>Doubts Cleared</h3>
+                     <h4 class="display-4">
+                     <i class="fas fa-thumbs-up"></i> {% if user.is_authenticated %} {{user.doubts_solved}} {% else %} -- {% endif %}
+                    </h4>
+                    
+                   </div>
+                  </div>
+               </div>
+               <div style="margin-top:20px;">
+                   <div class="card text-center bg-light text-dark mb-3">
+                    <div class="card-body">
+                     <h3>Happy Students</h3>
+                     <h4 class="display-4">
+                     <i class="far fa-smile"></i> {% if user.is_authenticated %} {{user.total_users}} {% else %} 100+ {% endif %}
+                    </h4>
+                    
+                   </div>
+                  </div>
+               </div>
+          
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+   
+{% endblock %}
