@@ -1,0 +1,127 @@
+{% extends 'Accounts/base.html' %}
+{% block title %} Forum {% endblock %}
+{% load static %}
+{% block content %}
+
+	
+
+<!-- This is the Navbar -->
+
+	  <body data-spy="scroll" data-target=".navbar" >
+		<!-- Navbar links -->
+		<header id="header">
+		  <div class="container-fluid fixed-top bg-dark" >
+			<nav class="navbar navbar-expand-lg ">
+			  <div class="container-fluid">
+				<!-- Logo -->
+				<a class="logo" href="{% url 'home' %}"><img src="{% static 'Accounts/assets/logo.png' %}" width="200px;" alt=""></a>
+				  <button class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarContent"
+					aria-controls="navbarContent"
+					aria-expanded="false"
+					aria-label="Toggle navigation">
+				   <span class="navbar-toggler-icon"><img src="{% static 'Accounts/assets/Ham.png' %}" style="width: 30px;" alt=""/></span>
+				  </button>
+				<!-- navbar links -->
+				<div class="collapse navbar-collapse" id="navbarContent" >
+				  <ul class="navbar-nav ml-auto ">
+					<li class="nav-item">
+					  
+					  <a class="nav-link text-light " href="{% url 'home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fa fa-home"></span> Home</a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link text-light" href="{% url 'quiz_category_list_all' %}" data-scroll-nav="5" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fas fa-pen"></span> Quiz</a>
+					</li>
+					<li class="nav-item">
+					  <a class="nav-link text-light" href="{% url 'forum_home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px"><span class="fas fa-comments"></span> Forum</a>
+					</li>
+	  
+								<li><div class="dropdown">
+					  <button type="button" class="btn btn-outline-light dropdown-toggle fa fa-user" data-toggle="dropdown">
+					  </button>
+					  <div class="dropdown-menu dropdown-menu-right">
+						{% if user.is_authenticated %}
+						<a class="dropdown-item" href="{% url 'quiz_progress' %}">Quiz  Progress</a>
+						<a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">My Profile</a>
+						<a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+						{% else %}
+						<a class="dropdown-item" href="{% url 'authenticate' %}">Sign in</a>
+						{% endif %}
+					  </div>
+	  
+					</div></li>
+				  </ul>
+				</div>
+			  </div>
+			</nav>
+		  </div>
+		</header>
+		<!-- End Navbar -->
+	
+		<div class ="container">
+			<div class = "row">
+				<div class = "col-sm-12">
+					<h1> Codecell Quiz Test ::  <font color = "blue"> {{ quiz }} </font> </h1>
+					<div class ="table-responsive">
+					<table class = "table table-bordered" style = "margin : 5% 0 ">
+						<thead>
+							<tr>
+								<th colspan = 2> <font color = "green" size = 5><center>Marks : {{marks}}/{{quiz.total_marks}} </center></font></th>	
+							</tr>
+						</thead>
+						
+						<tbody>
+						
+							<tr>
+								<td> Total questions </td>
+								<td> {{quiz.max_questions}} </td>	
+							</tr>
+							
+							<tr>
+								<td> Correct </td>
+								<td> {{progress.Questions_correct}} </td>
+							</tr>
+							
+						</tbody>
+						
+					</table>
+					</div>	
+
+		
+			<h2> <font color = "green"> REVIEW QUIZ </font>  </h2>
+			{% for question,answer,counter in content %}
+      								
+			<div class = "container" style="font-size:20px; margin : 5% 0%">
+				<div class = "text-drak" style = "width : 100%; font-size : 25px; margin : 3% 0%;font-style: bold">
+						{{ counter }}) {{ question.content }} 
+			
+				</div>
+				{% for  answer,correct,attempted in answer %}
+
+				{% if correct is True %}
+				<div class="badge badge-success badge-pill " style="width : 100%; padding-bottom:15px; padding-top:15px; font-size:20px; margin:5px 5px; border:1px solid black">{{ answer.content }}</div>
+				{% endif %}
+
+				{% if correct is False and attempted is True %}
+				<div class="badge badge-danger badge-pill " style="width : 100%; padding-bottom:15px; padding-top:15px; font-size:20px; margin:5px 5px; border:1px solid black">{{ answer.content }}</div>
+				{% endif %}
+
+				{% if attempted is False %}
+				<div class="badge badge-light badge-pill " style="width : 100%; padding-bottom:15px; padding-top:15px; font-size:20px; margin:5px 5px; border:1px solid black">{{ answer.content }}</div>
+				{% endif %}				
+				
+				{% endfor %}
+						
+						<div class = "" style="margin-top: 2vh">
+						<p>Ans:-	{{question.explanation}}</p>
+						</div>	
+						</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	
+	</center>
+{% endblock %}

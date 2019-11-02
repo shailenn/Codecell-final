@@ -1,0 +1,88 @@
+{% extends 'Accounts/base.html' %}
+{% load static %}
+{% block title %}
+{{ quiz.title }}
+{% endblock %}
+
+{% block content %}
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+ <!-- Navbar links -->
+
+  <header id="header">
+    <div class="container-fluid fixed-top bg-dark" >
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <!-- Logo -->
+          <a class="logo" href="{% url 'home' %}"><img src="{% static 'Accounts/assets/logo.png' %}" width="200px;" alt=""></a>
+            <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"><img src="{% static 'Accounts/assets/Ham.png' %}" style="width: 30px;" alt=""/></span>
+            </button>
+          <!-- navbar links -->
+          <div class="collapse navbar-collapse" id="navbarContent" >
+            <ul class="navbar-nav ml-auto ">
+              <li class="nav-item">
+                
+                <a class="nav-link active text-light " href="{% url 'home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fa fa-home"></span> Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'quiz_category_list_all' %}" data-scroll-nav="5" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fas fa-pen"></span> Quiz</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'forum_home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px"><span class="fas fa-comments"></span> Forum</a>
+              </li>
+
+                          <li><div class="dropdown">
+                <button type="button" class="btn btn-outline-light dropdown-toggle fa fa-user" data-toggle="dropdown">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  {% if user.is_authenticated %}
+                  <a class="dropdown-item" href="{% url 'quiz_progress' %}">Quiz  Progress</a>
+                  <a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">My Profile</a>
+                  <a class="dropdown-item" href="{%url 'logout' %}">Logout</a>
+                  {% else %}
+                  <a class="dropdown-item" href="{% url 'authenticate' %}">Sign in</a>
+                  {% endif %}
+                </div>
+
+              </div></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- End Navbar -->
+
+
+<div class="container" style="margin-top: 20vh;text-align: center;">
+  <h2 style="color: black"> {{ quiz.title }}</h2>
+  
+  <h3 style="color: black"> Category :- {{quiz.category}}</h3>
+  
+  <p style="color: black"> {{ quiz.description }} </p>
+  
+{% if time_error %}
+  Please wait one hour before reattempting the quiz.
+{% else %}
+  <button type="button" class="btn btn-success btn-lg" onclick="window.location.href = '{% url 'Quiz_attempt' quiz_name=quiz.url%}'" data-toggle="tooltip" title="All the best">Start</button>
+{% endif %}
+  <strong><h4 style="color: black;margin-bottom: 20px;margin-top: 20px">Note :- </h4></strong>
+  {% if quiz.single_attempt %}
+      <h4 style="color: black">You will only get one attempt at this quiz.</h4>
+  {% else %}
+      <h4 style="color: black">You can attempt this quiz only once per hour.</h4>
+  {% endif %}
+  
+  {% endblock %}
+  </div>

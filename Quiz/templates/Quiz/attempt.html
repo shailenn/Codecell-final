@@ -1,0 +1,22 @@
+{% extends 'Accounts/base.html' %}
+{% block content %}
+
+   
+<form enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+
+    {% for field in Quiz_form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+       {{ forloop.counter }} ) {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+    <input type="submit" name="" value="Submit">
+</form>
+
+
+{% endblock %}

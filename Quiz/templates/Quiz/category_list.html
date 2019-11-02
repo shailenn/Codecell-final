@@ -1,0 +1,111 @@
+{% extends 'Accounts/base.html' %}
+{% block content %}
+{% load static %}
+
+ <!-- Navbar links -->
+
+  <header id="header">
+    <div class="container-fluid fixed-top bg-dark" >
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <!-- Logo -->
+          <a class="logo" href="{% url 'home' %}"><img src="{% static 'Accounts/assets/logo.png' %}" width="200px;" alt=""></a>
+            <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"><img src="{% static 'Accounts/assets/Ham.png' %}" style="width: 30px;" alt=""/></span>
+            </button>
+          <!-- navbar links -->
+          <div class="collapse navbar-collapse" id="navbarContent" >
+            <ul class="navbar-nav ml-auto ">
+              <li class="nav-item">
+                
+                <a class="nav-link active text-light " href="{% url 'home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fa fa-home"></span> Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'quiz_category_list_all' %}" data-scroll-nav="5" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fas fa-pen"></span> Quiz</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'forum_home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px"><span class="fas fa-comments"></span> Forum</a>
+              </li>
+
+                          <li><div class="dropdown">
+                <button type="button" class="btn btn-outline-light dropdown-toggle fa fa-user" data-toggle="dropdown">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  {% if user.is_authenticated %}
+                  <a class="dropdown-item" href="{% url 'quiz_progress' %}">Quiz  Progress</a>
+                  <a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">My Profile</a>
+                  <a class="dropdown-item" href="{%url 'logout' %}">Logout</a>
+                  {% else %}
+                  <a class="dropdown-item" href="{% url 'authenticate' %}">Sign in</a>
+                  {% endif %}
+                </div>
+
+              </div></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- End Navbar -->
+
+<div >
+  <div class="container" style="display: flex"> 
+        <div class="row" style="margin-top: 3vh;">    
+          <div class="card col-md-6" style="width:auto;padding: 2vh;border: 1px solid black;">
+            <img class="card-img-top img-fluid" src="https://static.makeuseof.com/wp-content/uploads/2018/03/python-faq-670x335.jpg" alt="Card image"  >
+            <div class="card-body">
+              <h4 class="card-title">Python</h4>
+              <p class="card-text">Python is an interpreted, high-level, general-purpose programming language.</p>
+              <a href="{% url 'Quiz_category_list_matching' category_name=Python %}" class="btn btn-success btn-lg">Test</a>
+            </div>
+          </div>
+      
+        <div class="card col-md-6" style="width: auto;padding: 2vh;border: 1px solid black;">
+          <img class="card-img-bottom img-fluid" src="https://www.oracle.com/a/ocom/img/hp11-intl-java-logo.jpg" alt="Card image" >
+          <div class="card-body">
+            <h4 class="card-title">JAVA</h4>
+            <p class="card-text">Java is a general-purpose programming language that is class-based, object-oriented, and designed.</p>
+            <a href="{% url 'Quiz_category_list_matching' category_name=Java %}" class="btn btn-success btn-lg">Test</a>
+          </div>
+          
+        </div>
+    </div>
+  </div>
+  
+  <div class="container" style="display: flex;">
+    <div class="row">  
+      <div class="card col-md-6" style="width:auto;padding: 2vh;border: 1px solid black">
+        <img class="card-img-top img-fluid" src="https://tdwi.org/-/media/TDWI/TDWI/BITW/AI17.jpg" alt="Card image" >
+        <div class="card-body">
+          <h4 class="card-title">DBMS</h4>
+          <p class="card-text">A database management system (DBMS) is a software package designed to define, manipulate, retrieve and manage data in a database. </p>
+          <a href="{% url 'Quiz_category_list_matching' category_name=DBMS %}" class="btn btn-success btn-lg">Test</a>
+        </div>
+      </div>
+
+    
+    
+      <div class="card col-md-6" style="width:auto;padding: 2vh ;border: 1px solid black">
+        <img class="card-img-bottom img-fluid" src="https://cdnp1.stackassets.com/dbd8b662370e2dd5283d3f352802c43c79b15f8d/store/opt/596/298/abf733ad50de70c3ad93f8b34f894876f93318a2aff76ccc7504ecce0fc1/product_16032_product_shot_wide_image.jpg" alt="Card image" >
+        <div class="card-body">
+          <h4 class="card-title">C</h4>
+          <p class="card-text">C is a high-level and general-purpose programming language that is ideal for developing firmware or portable applications.</p>
+          <a href="{% url 'Quiz_category_list_matching' category_name=C %}" class="btn btn-success btn-lg">Test</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</div>
+  <hr class="tg-hr">
+
+
+{% endblock %}
