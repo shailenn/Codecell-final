@@ -1,0 +1,14 @@
+1) Quiz detail view urls are not in right order. If anyone knows how to solve it, please contact us.
+	- What we want is quiz/quiz_name.
+	- What we get is quiz/quiz/quiz_name.
+
+2) Comments adding is dynamic
+
+3) Pop up adding of topics is not implemented
+
+4) We need a rich text editor for users who wish to write detailed answers.
+
+5) We haven't displayed errors happening while loggin in a user. Views = register, login etc.
+
+6) We need different cards for different answers in answerlist html page.
+
