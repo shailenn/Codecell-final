@@ -1,0 +1,7 @@
+# Run 'pip install -r requirements.txt'
+
+django
+django-model-utils
+Pillow
+python-dateutil
+
