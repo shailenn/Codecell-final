@@ -1,0 +1,116 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="zxx">
+
+<head>
+	<title>CodeCell - Login</title>
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<meta name="keywords" content="Triple Forms Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<!-- Meta tag Keywords -->
+
+	<!-- css files -->
+	<link rel="stylesheet" href="{% static 'Accounts/Signing/css/style.css' %}" type="text/css" media="all" />
+	<!-- Style-CSS -->
+	<link href="{% static 'Accounts/Signing/css/font-awesome.min.css' %}" rel="stylesheet">
+	<!-- Font-Awesome-Icons-CSS -->
+	<!-- //css files -->
+
+	<!-- web-fonts -->
+	<link href="//fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext"
+	 rel="stylesheet">
+	<!-- //web-fonts -->
+</head>
+
+<body>
+		{% if error %}
+		<div style="align-items: center;">
+				<strong>{{ error }}</strong>
+		</div>
+		{% endif %}
+	<div class="main-bg">
+		<!-- title -->
+		<br><br>
+		<h5 style="float:right;"><a href="{% url 'home' %}" style="color:white; padding:20px;">Back To Home Page</a></h5>
+       <h5 style="float:right; color:white;">&larr;</h5>
+       <br>
+		<h1>&nbsp;</h1>
+		<!-- //title -->
+		<div class="sub-main-w3">
+			
+			<!-- vertical tabs -->
+			<div class="vertical-tab">
+				<div id="section1" class="section-w3ls">
+					<input type="radio" name="sections" id="option1" checked>
+					<label for="option1" class="icon-left-w3pvt"><span class="fa fa-user-circle" aria-hidden="true"></span>Login</label>
+					
+					<article>
+						<form  method="post">
+								{% csrf_token %}
+							<h3 class="legend" style="font-family:;">Login</h3>
+							<div class="input">
+								
+								<span class="fa fa-envelope-o" aria-hidden="true"></span>
+								<input type="text" placeholder="username" name="lusername" />
+							</div>
+							<div class="input">
+								<span class="fa fa-key" aria-hidden="true"></span>
+								<input type="password" placeholder="Password" name="lpassword" />
+							</div>
+							<button type="submit" name="login" class="btn submit">Login</button> 
+						</form>
+					</article>
+				</div>
+				<div id="section2" class="section-w3ls">
+					<input type="radio" name="sections" id="option2">
+					<label for="option2" class="icon-left-w3pvt"><span class="fa fa-pencil-square" aria-hidden="true"></span>Signup</label>
+					<article>
+						<form method="post">
+								{% csrf_token %}
+							<h3 class="legend" style="font-family:;">Signup</h3>
+							<div class="input">
+								<span class="fa fa-envelope-o" aria-hidden="true"></span>
+								<input type="text" placeholder="Email" name="remail" />
+							</div>
+							<div class="input">
+								<span class="fa fa-envelope-o" aria-hidden="true"></span>
+								<input type="text" placeholder="Username" name="rusername" />
+							</div>
+							<div class="input">
+								<span class="fa fa-key" aria-hidden="true"></span>
+								<input type="password" placeholder="Password" name="rpassword" />
+							</div>
+							<button name="login" type="submit" class="btn submit">Register</button>
+							<a href="#" class="bottom-text-w3ls">Be the member of codecell!</a>
+						</form>
+					</article>
+					
+				</div>
+				
+				
+				
+			</div>
+			<!-- //vertical tabs -->
+			<div class="clear"></div>
+		</div>
+		<!-- copyright -->
+		<div class="copyright">
+			<h2>&copy; CodeCell
+			</h2>
+		</div>
+		<!-- //copyright -->
+	</div>
+
+</body>
+
+</html>

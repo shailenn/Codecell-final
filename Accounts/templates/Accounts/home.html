@@ -1,0 +1,194 @@
+{% extends 'Accounts/base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+{% load static %}
+
+<!-- This is the Navbar -->
+
+<style>
+  html {
+  scroll-behavior: smooth;
+}
+</style>
+<body data-spy="scroll" data-target=".navbar" >
+  <!-- Navbar links -->
+  <header id="header">
+    <div class="container-fluid fixed-top bg-dark" >
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <!-- Logo -->
+          <a class="logo" href="{% url 'home' %}"><img src="{% static 'Accounts/assets/logo.png' %}" width="200px;" alt=""></a>
+            <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"><img src="{% static 'Accounts/assets/Ham.png' %}" style="width: 30px;" alt=""/></span>
+            </button>
+          <!-- navbar links -->
+          <div class="collapse navbar-collapse" id="navbarContent" >
+            <ul class="navbar-nav ml-auto ">
+              <li class="nav-item">
+                
+                <a class="nav-link text-light " href="{% url 'home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fa fa-home"></span> Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'quiz_category_list_all' %}" data-scroll-nav="5" style="font-size: 25px;padding-left: 10px;padding-right: 10px;"><span class="fas fa-pen"></span> Quiz</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="{% url 'forum_home' %}" style="font-size: 25px;padding-left: 10px;padding-right: 10px"><span class="fas fa-comments"></span> Forum</a>
+              </li>
+
+                          <li><div class="dropdown">
+                <button type="button" class="btn btn-outline-light dropdown-toggle fa fa-user" data-toggle="dropdown">
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                  {% if user.is_authenticated %}
+                  <a class="dropdown-item" href="{% url 'quiz_progress' %}">Quiz  Progress</a>
+                  <a class="dropdown-item" href="{% url 'user_profile' username=request.user.username %}">My Profile</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                  {% else %}
+                  <a class="dropdown-item" href="{% url 'authenticate' %}">Sign in</a>
+                  {% endif %}
+                </div>
+
+              </div></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- End Navbar -->
+<div>
+  <div class="container-fluid bg-secondary" style="height: auto;text-align: left;margin-top: auto;">
+  <div class="row">
+    <!-- <div class="container-fluid bg-secondary" style="height: auto;text-align: left;margin-top: auto;"> -->
+    <div class="col-lg-6 col-md-6 col-xs-6" style="text-align: center;">  
+      <h1 style="color: white;padding-top: 3vh;text-align: center;margin-top: 4vh">"Platform for coders, by the coders"</h1>
+      <a href="#about" class="btn bg-success text-light btn-lg" role="button" style="margin-top: 3vh;margin-bottom: 5vh;">Learn more</a>
+    </div>
+    <div class="col-lg-6 col-md-6 col-xs-6">
+      <img src="{% static 'Accounts/assets/CodeCell Logo 1 copy.png' %}" class="img-fluid" style="padding-bottom: 2vh;margin-bottom: auto;">
+    </div>
+    <!-- </div> -->
+  </div>
+  </div>
+</div>
+  
+  <div id="introbox">
+    <div class="container" style="text-align: center;font-size: 22px;margin-top: 5vh;margin-bottom: 4vh">
+      <div class="row">
+        <div class="col-md-4" style="margin-bottom: 3vh">
+          <h1 class="text-success" >Who We Are</h1>
+          <p class="text-dark">
+            Codecell: A platform for students to code and excel in their
+            coding abilities. We are students who have took the initiative 
+            to help one another on our path to becoming efficient coders.
+          </p>
+        </div>
+        <div class="col-md-4" style="margin-bottom: 3vh">
+          <h1 class="text-success">Objective</h1>
+          <p class="text-dark">
+            We aim to create a platform where students will be able to 
+            learn and update their knowledge to the current industry standards.
+          </p>
+        </div>
+        <div class="col-md-4" style="margin-bottom: 3vh">
+          <h1 class="text-success">Plans</h1>
+          <p class="text-dark">
+            Project Drive :- Where mentors guide you to create a project you will be proud to add in your CV.<br>
+            Reach and Teach :- Mentors teach you the latest tech in the industry.
+          </p>
+        </div>
+      </div>
+      </div>
+    </div>
+<hr style="width: 85%;border-width: 5px;">
+<div class="container text-success" style="margin-bottom: 7vh;margin-top: 5vh">
+    <h1 style="text-align: center;margin-bottom: 3vh">Gallery</h1>  
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" style="align-content: center;">
+        <div class="carousel-item active">
+          <img src="{% static 'Accounts/assets/m1.jpg' %}" class="img-fluid" >
+        </div>
+
+        <div class="carousel-item">
+          <img src="{% static 'Accounts/assets/m2.jpg' %}" class="img-fluid">
+        </div>
+      
+        <div class="carousel-item">
+          <img src="{% static 'Accounts/assets/m3.jpg' %}" class="img-fluid">
+        </div>
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+  </div>
+<hr style="width: 85%;border-width: 5px;margin-bottom: 5vh">
+
+<div class="container" id="about">
+  <h1 class="text-success text-success" style="text-align: center;margin-bottom: 3vh">About Us</h1>
+  <p style="margin-bottom: 6vh;font-size: 22px;text-align: center;">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+</div>
+
+<footer class="footer bg-secondary">
+    <div class="container">
+        <div class="row">             
+            <div class="col-4 offset-1 col-sm-2" style="padding-top: 3vh">
+                <h4 style="color: black">Links</h5>
+                <ul class="list-unstyled">
+                    <li><a style="color: white" href="{% url 'home' %}">Home</a></li>
+                    <li><a style="color: white" href="{% url 'quiz_category_list_all' %}">Quiz</a></li>
+                    <li><a style="color: white" href="{% url 'forum_home' %}">Forum</a></li>
+                </ul>
+            </div>
+            <div class="col-7 col-sm-5" style="padding-top: 3vh">
+                <h4 style="color: black">Contact Us</h5>
+                <address style="color: white">
+                  Juhu Versova Link Rd,Bharat Nagar, Versova,<br>
+                  Andheri West, Mumbai - 400053<br>
+                  India<br>
+              <i style="color: black" class="fa fa-phone fa-lg"></i> : +91 123456789<br>
+              <i style="color: black" class="fa fa-fax fa-lg"></i> : +91 123456789<br>
+              <i style="color: black" class="fa fa-phone fa-envelope"></i> : <a style="color: white" href="mailto:confusion@food.net">rgitcodecell@gmail.com</a>
+           </address>
+            </div>
+            <div class="col-12 col-sm-4 align-self-center">
+                <div class="text-center">
+                    <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fa fa-google-plus fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/"><i class="fa fa-facebook fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fa fa-linkedin fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fa fa-twitter fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fa fa-youtube fa-lg"></i></a>
+                </div>
+            </div>
+       </div>
+       <div class="row justify-content-center">             
+            <div class="col-auto">
+                <p>© Copyright 2019 RGIT-Codecell</p>
+            </div>
+       </div>
+    </div>
+  </footer>
+
+{% endblock %}

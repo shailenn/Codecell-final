@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>CodeCell - Profile</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="Civic - CV Resume">
+	<meta name="keywords" content="resume, civic, onepage, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->   
+	<link href="" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,400i,600,600i,700" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'Accounts/profile/css/bootstrap.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'Accounts/profile/css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'Accounts/profile/css/flaticon.css' %}"/>
+	<link rel="stylesheet" href="{% static 'Accounts/profile/css/style.css' %}"/>
+
+
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+	
+	<!-- Header section start -->
+	<header class="header-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="site-logo">
+						<h2><a href="{% url 'home' %}">CodeCell</a></h2>
+						<p>Your Profile Is Your Resume</p>
+					</div>
+				</div>
+				<div class="col-md-8 text-md-right header-buttons">
+					{% if can_edit %}
+					<a href="{% url 'profile_update' username=request.user.username %}" class="site-btn">Update Profile</a>
+					{% endif %}
+					<a href="{% url 'home' %}" class="site-btn">Home Page</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Header section end -->
+
+	<!-- Hero section start -->
+	<section class="hero-section spad">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="row">
+						<div class="col-lg-10">
+							<div class="hero-text">
+								<h2>{{user.username}}</h2>
+								<p>{{ student.description }}</p>
+							</div>
+							<div class="hero-info">
+								<h2>General Info</h2>
+								<ul>
+									<li><span>FullName</span>{{ user.first_name}} {{ user.last_name }}</li>
+									<li><span>Date of Birth</span>{{ student.birthdate }}</li>
+									<li><span>E-mail</span>{{ user.email}}</li>
+									<li><span>Phone </span>{{ student.phone }}</li>
+									<li><span>Stream</span>{{ student.stream }}</li>
+									{% if student.achname1 %}<li><span>{{ student.achname1 }}</span><a href="#">{{ student.ach1}}</a></li>{% endif %}
+									{% if student.achname2 %}<li><span>{{ student.achname2 }}</span><a href="#">{{ student.ach2}}</a></li>{% endif %}
+									{% if student.achname3 %}<li><span>{{ student.achname3 }}</span><a href="#">{{ student.ach3}}</a></li>{% endif %}
+									{% if student.achname4 %}<li><span>{{ student.achname4 }}</span><a href="#">{{ student.ach4}}</a></li>{% endif %}
+								</ul>
+							</div>
+						</div>
+						<div class="col-lg-2 mt-auto">
+							<div class="hero-info">
+								<ul>
+									<li><span>Questions Asked</span>{{user.doubts_asked}}</li>
+									<li><span>Questions Answered</span>{{ user.doubts_solved}}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+	<!-- Social links section start -->
+	<div class="social-section">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xl-10 offset-xl-1">
+					<div class="social-link-warp">
+						<div class="social-links">
+							{% if student.instagramlink %}<a href="//{{ student.instagramlink }}"><i class="fa fa-instagram"></i></a>{% endif %}
+							{% if student.facebooklink %}<a href="{{ student.facebooklink }}"><i class="fa fa-facebook"></i></a>{% endif %}
+							{% if student.githublink %}<a href="//{{ student.githublink }}"><i class="fa fa-github"></i></a>{% endif %}
+							{% if student.linkedinlink %}<a href="{{ student.linkedinlink }}"><i class="fa fa-linkedin"></i></a>{% endif %}
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+	<!-- Social links section end -->
+
+	
+	<!-- Footer section start -->
+	
+	<!-- Footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="{% static 'Accounts/profile/js/jquery-2.1.4.min.js' %}"></script>
+	<script src="{% static 'Accounts/profile/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'Accounts/profile/js/main.js' %}"></script>
+</body>
+</html>
