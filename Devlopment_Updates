@@ -1,0 +1,169 @@
+8 October 2019: Omkar Chorghe and Nachiket Digha
+	- Nachiket modified the ask question and forum home page.
+	- Now users are logged in as they sign up. No need to logging in after user is logged in.
+
+
+7 October 2019: Omkar Chorghe and Nachiket Digha
+	- Nachiket modified Home page and added a carousel
+	- Nachiket addressed the colors for Forum.
+	* Removed bugs
+		- You could submit a blank answer in forum.
+		- Unique username Integrity error.
+		- Now user can't take the quiz more than once, it will not show the take quiz url.
+	- Happy students is now dynamic.
+
+
+6 October 2019: Omkar Chorghe and Asad Memon
+	- Added all front end pages with navbars
+		- two pages needs to be more customized progress page and correct answer page
+	- Solved a critical bug 
+		- Registering a new user was fautly
+		- It happened due to a havoc in Migrations
+		- MCQ was being created in table before Question table was created.
+		- Changed the django root file, migrations 
+* 	- Testing might be needed in quiz
+
+
+5 October 2019: Omkar Chorghe and Asad Memon and Saket and Nabeel
+	- Added new Front end pages for forum as given by Asad.
+*	 	- merged two views for answer list and give answer, probably need testing
+	- Added Home page with navbar
+	- Added Quiz Category page with navbars
+	- Forum pages by Asad
+	- Quiz category page by Nabeel
+	- Login/Register page by Saket
+
+
+4 October 2019: Omkar Chorghe
+	- Critical Bug
+		- User was being registered but the variable password was being not hashed properly
+
+
+3 October 2019: Omkar Chorghe	
+	- Added login for forum question and answer views
+	 	- method decorators for dispatch function.
+
+
+1 October 2019 : Omkar Chorghe
+	- Added a forum view, lists all forum questions ordered by recents.
+	- Added a ask question view, template 
+		- view is class based CreateView
+	- Added a list all answers view and template
+	- Added a answer question view and template
+		- view is class based CreateView
+	- User can now question and anybody else can answer it.
+
+
+29 September 2019 : Omkar Chorghe
+	- Added redirect urls (buggy )
+	* Started A forum App
+		- Created Models :- Question, Answer, Comment etc.
+		- Registered At admin site.
+		- Added a forum home view, lists all question ( still needs work ).
+
+
+25 September 2019 : Omkar Chorghe
+	- Added a new html template correct.html
+	- This page renders when user submits a quiz.
+	- It displays the correct answer, along with highlighting the answer user selected.
+	- Also displays the explanation for each question.
+	- Quiz App is done 95%.
+	- Finishing touches remaining.
+
+
+24 September 2019 : Omkar Chorghe
+	- Recorrected post view for quiz taking and checked the right solutions that user has submitted.
+	- Added a new progress model for our quiz.
+	- Progress Stores user, quiz, attempted on and other information like marks, attempted questions etc.
+	- Post view now creates a new Progress and saves it.
+	- Added a new view for progress.
+		- New template progress.html.
+		- View displays all quizzes user took, marks he/she got and more information.
+		- Only a logged in user can see his/her progress.
+		- Quiz are sorted on recent quiz taken.
+
+
+23 September 2019 : Omkar Chorghe @special_mention = Sagar Maharaja for helping debug
+	- Added a new template for quiz and its detail - quiz_detail.html
+	- Added a detailview (inbuilt) for displaying quiz information and also give options to take the quiz
+	- Added url slug (have bugs) 
+	- Created A quiz Take template 
+	** User can now take a quiz :- More details to be updated Soon
+		- Random questions are taken from a quiz and rendered using inbuilt Forms model.
+		- Answers to this questions are randomly placed, so two way randomness.
+	- After submitting forms, post view is written. 	
+
+22 September 2019 : Omkar Chorghe
+	- Added New Models
+ 		* Wasted lot of time for deciding the database structure, so please do not ask to change again *
+		- Added model for Quiz
+		- Added model for Question ( Base class for all Question and it's answer types )
+		- Added a new folder with models - Multiple Choice Question
+	- Added a requirements.txt to easily install dependency while deploying
+		- instructions present in the respective files
+		- we have dependency on 
+			1) Pillow - for ImageField
+			2) django-utils for InheritanceManager( Returns the entire range of subclasses which may or may not be different
+	- Registered Quiz, Question, MCQ, Answer on Admin site
+	- We can now add these fields from admin page itself.
+	- Quiz Form is not yet finalized, need to think about the structure
+		- Any Suggestions, please contact me - wasted a lot of time doing and undoing it.
+	- Added a view for listing different quizzes under a category. 
+	- Added a regex re_path that can process complex urls for category matching.
+	- Added a quiz in categories template and a view for the same, also url has been defined by re_path.
+	- Added a level for quizzes as @Captain suggested
+	- User now goes from category listing to direct quizzes in that category, we have skipped sub-category page.
+
+
+
+21 September 2019 : Omkar Chorghe
+	- Bug - User was able to access login and register page even when he/she was signed in. 
+		- Added a authenticate if on both views and it redirects to home page if user is signed in.
+	- Successfully migrated register view from function based view to class based view.
+		- Class based view offers much more flexibility than function based view.
+	- Create App Quiz
+		- Added Models for category and sub category
+		- Added generic list view for category list view
+		- created quiz category list. html template
+		- registered for admin site and used a Admin class
+		- added respective urls
+	* Quiz App has following structure
+		We have categories and sub categories, to which a quiz will be linked.
+
+20 September 2019 : Omkar Chorghe
+	- Removed dependency from Accounts/home.html to Accounts/base.html
+		- base.html contains the link rel stylesheet cdn links and static links
+		- important to add two tags for all other html files to import those
+	- Removed bug - login redirect url used to trail home page and hence lead to inconsistent url pattern 
+
+
+25 August 2019 : Omkar Chorghe	
+	- Added views for registration, used inbuilt forms, need to make customized form
+	- Forms.py contains forms to make use of inbuilt form_view
+	- Modularized urls in Accounts and used include in global urls
+	- Successfully tested Log in, Log out, Register !!!
+
+
+24 August 2019 : Omkar Chorghe
+	- Added forms
+	- HTML pages
+		- Added Registration page
+		- Added log in page
+		- Looks Ugly
+	- Views for log in , log out
+
+
+23 August 2019 : Omkar Chorghe
+	- Initialized Codecell project
+	- Started App "Accounts"
+	- Created Model Student
+	- Home Page = Made a HTML Template Home Page 
+		- Added CDN Bootstrap for customizations 
+		- Added Navbar
+	- Added View -  home
+	- Registered at admin, added app in settings 
+	- Superuser set
+	- Made migrations 
+
+
+
